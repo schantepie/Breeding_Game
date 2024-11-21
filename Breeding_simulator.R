@@ -2,7 +2,6 @@ library(shiny)
 library(DT)
 library(ggplot2)
 library(kinship2)
-# library(visPedigree) ###### ATTENTION
 library(gridExtra)
 ##############################################
 ####### Own R function for the breeding game

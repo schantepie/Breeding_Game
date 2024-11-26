@@ -646,13 +646,15 @@ results_server <- function(id,datareact){
         exportresults$plotgenet
       })
   
-      summaryStat[["table"]]<- cbind(with(data.frame(datareact[["allGenerations"]][,c("Generation","PhenotypicValue","BreedingValue")]),
-                             aggregate(cbind(PhenotypicValue,BreedingValue) , by=list(as.factor(Generation)) , mean)),
-                             with(data.frame(datareact[["allGenerations"]][,c("Generation","PhenotypicValue","BreedingValue")]),
-                                  aggregate(cbind(PhenotypicValue,BreedingValue) , by=list(as.factor(Generation)) , var))
+     summaryStat[["table"]]<- cbind(with(data.frame(datareact[["allGenerations"]][,c("Generation","PhenotypicValue","BreedingValue")]),
+                                        aggregate(cbind(PhenotypicValue,BreedingValue) , by=list(as.factor(Generation)) , mean)),
+                                     with(data.frame(datareact[["allGenerations"]][,c("Generation","PhenotypicValue","BreedingValue")]),
+                                        aggregate(cbind(PhenotypicValue,BreedingValue) , by=list(as.factor(Generation)) , var)) ,
+                                     with(data.frame(datareact[["allGenerations"]][,c("Generation","PhenotypicValue")]),
+                                          aggregate(cbind(PhenotypicValue) , by=list(as.factor(Generation)) , function(x){length(x)}))
                              )
-       colnames(summaryStat$table)<-c("Generation","Mean Phenotype","Mean Breeding Value","Generation2","Phenotypic variance", "Genetic variance")
-       summaryStat$table=summaryStat$table[,c("Generation","Mean Phenotype","Phenotypic variance","Mean Breeding Value","Genetic variance")]
+       colnames(summaryStat$table)<-c("Generation","Mean Phenotype","Mean Breeding Value","Generation2","Phenotypic variance", "Genetic variance","Generation3","Nb individuals")
+       summaryStat$table=summaryStat$table[,c("Generation","Mean Phenotype","Phenotypic variance","Mean Breeding Value","Genetic variance","Nb individuals")]
        exportresults$tabResults<-tableGrob(summaryStat[["table"]])
        
       output$tableSummaryOutput <- renderTable({

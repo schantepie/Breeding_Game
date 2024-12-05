@@ -1,3 +1,10 @@
+##  The Breeding Game is distributed in the hope that it will be useful,
+##  but WITHOUT ANY WARRANTY; without even the implied warranty of
+##  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+##  GNU General Public License v.3.0 for more details.
+
+
+
 library(shiny)
 library(DT)
 library(ggplot2)
